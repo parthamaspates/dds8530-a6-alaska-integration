@@ -1,0 +1,10 @@
+data/
+outputs/stream/
+outputs/*.parquet
+*.db
+__pycache__/
+.ipynb_checkpoints/
+spark-warehouse/
+metastore_db/
+derby.log
+.pytest_cache/

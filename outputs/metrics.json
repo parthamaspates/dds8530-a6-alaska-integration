@@ -1,0 +1,170 @@
+{
+  "listings": 69616,
+  "sources": 68,
+  "attribute_rows": 1677105,
+  "clean_report": {
+    "rows_in": 1618346,
+    "specs_in": 67100,
+    "placeholder_values_removed": 6991,
+    "duplicate_attribute_rows": 326,
+    "duplicate_listings_removed": 1946,
+    "rows_out": 1582513,
+    "specs_out": 65154
+  },
+  "schema_matching": [
+    {
+      "vertical": "camera",
+      "gt_pairs": 835,
+      "predicted": 521,
+      "correct": 428,
+      "precision": 0.821,
+      "recall": 0.513,
+      "f1": 0.631
+    },
+    {
+      "vertical": "monitor",
+      "gt_pairs": 1344,
+      "predicted": 678,
+      "correct": 487,
+      "precision": 0.718,
+      "recall": 0.362,
+      "f1": 0.482
+    },
+    {
+      "vertical": "notebook",
+      "gt_pairs": 1620,
+      "predicted": 503,
+      "correct": 388,
+      "precision": 0.771,
+      "recall": 0.24,
+      "f1": 0.366
+    }
+  ],
+  "entity_resolution": [
+    {
+      "vertical": "camera",
+      "labeled_listings": 3474,
+      "true_pairs": 124629,
+      "predicted_pairs": 93424,
+      "precision": 0.898,
+      "recall": 0.673,
+      "f1": 0.769
+    },
+    {
+      "vertical": "monitor",
+      "labeled_listings": 2083,
+      "true_pairs": 11091,
+      "predicted_pairs": 12825,
+      "precision": 0.272,
+      "recall": 0.314,
+      "f1": 0.291
+    },
+    {
+      "vertical": "notebook",
+      "labeled_listings": 993,
+      "true_pairs": 7123,
+      "predicted_pairs": 21581,
+      "precision": 0.242,
+      "recall": 0.734,
+      "f1": 0.364
+    }
+  ],
+  "entity_resolution_spark": [
+    {
+      "vertical": "camera",
+      "labeled_listings": 3474,
+      "true_pairs": 124629,
+      "predicted_pairs": 93424,
+      "precision": 0.898,
+      "recall": 0.673,
+      "f1": 0.769
+    },
+    {
+      "vertical": "monitor",
+      "labeled_listings": 2083,
+      "true_pairs": 11091,
+      "predicted_pairs": 12825,
+      "precision": 0.272,
+      "recall": 0.314,
+      "f1": 0.291
+    },
+    {
+      "vertical": "notebook",
+      "labeled_listings": 993,
+      "true_pairs": 7123,
+      "predicted_pairs": 21581,
+      "precision": 0.242,
+      "recall": 0.734,
+      "f1": 0.364
+    }
+  ],
+  "quality": [
+    {
+      "field": "brand",
+      "stage": "naive (exact names)",
+      "pct_missing": 61.40835558829849
+    },
+    {
+      "field": "brand",
+      "stage": "integrated",
+      "pct_missing": 13.260889584676306
+    },
+    {
+      "field": "screen_size_in",
+      "stage": "naive (exact names)",
+      "pct_missing": 57.81686465911533
+    },
+    {
+      "field": "screen_size_in",
+      "stage": "integrated",
+      "pct_missing": 38.47039322221199
+    },
+    {
+      "field": "weight_kg",
+      "stage": "naive (exact names)",
+      "pct_missing": 75.4645745193595
+    },
+    {
+      "field": "weight_kg",
+      "stage": "integrated",
+      "pct_missing": 65.05382102500937
+    }
+  ],
+  "timings_s": {
+    "ingest_pandas": 34.517,
+    "ingest_dask": 19.59,
+    "ingest_spark": 28.75,
+    "seed_postgres": 21.378,
+    "seed_mongo": 1.286,
+    "seed_csv": 2.081,
+    "extract_postgres": 1.24,
+    "extract_mongo": 0.277,
+    "extract_csv_pandas": 0.603,
+    "extract_csv_dask": 0.514,
+    "clean_pandas": 9.507,
+    "clean_dask_values": 5.989,
+    "schema_matching": 0.695,
+    "er_pandas": 2.733,
+    "er_spark": 12.155,
+    "join_pandas": 0.502,
+    "join_dask": 1.315,
+    "join_spark": 2.548
+  },
+  "stream": {
+    "listings": 2516,
+    "batches": 21,
+    "elapsed_s": 114.3,
+    "producer": {
+      "sent": 2516,
+      "polls": 101
+    },
+    "match_rate": 0.731,
+    "max_lag_s": 6.52,
+    "accuracy": {
+      "labeled_streamed": 384,
+      "matched_with_labeled_entity": 317,
+      "correct": 272,
+      "precision": 0.858
+    }
+  }
+}
