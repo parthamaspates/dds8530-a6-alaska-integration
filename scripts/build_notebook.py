@@ -12,14 +12,14 @@ md("""
 
 Data: the **Alaska benchmark** (Crescenzi et al., 2021): 69,616 product specifications (camera, monitor, notebook) scraped from 68 e-commerce websites, with entity-resolution and schema-matching ground truth.
 
-To reproduce a realistic integration problem, each vertical is stored in a different system and one website per vertical arrives later as a live feed:
+To reproduce a realistic integration problem, each vertical is stored in a different system and one website per vertical is replayed later as a stream. Spark runs on a standalone cluster (one master, two worker containers):
 
 | Vertical | Stored in | Accessed with |
 |---|---|---|
 | camera | PostgreSQL (relational, EAV tables) | SQLAlchemy |
 | monitor | MongoDB (one document per listing) | PyMongo |
 | notebook | CSV partner feed (long format) | Pandas / Dask |
-| 3 held-out websites | REST listing API → Kafka topic | kafka-python, Spark Structured Streaming |
+| 3 held-out websites | REST API that replays their listings → Kafka topic | kafka-python, Spark Structured Streaming |
 
 Sections: 1 ingestion and engine comparison · 2 heterogeneous sources · 3 extraction and unification · 4 cleaning · 5 schema matching · 6 unified schema · 7 entity resolution (Pandas vs. Spark) · 8 real-time integration (Kafka + Spark) · 9 visual analysis · 10 summary.
 """)
@@ -29,7 +29,17 @@ sys.path.insert(0, os.path.abspath("../src"))
 import numpy as np, pandas as pd
 from IPython.display import Image, display
 from alaska_int import config, loaders, stores, clean, schema_match, er, viz
-from alaska_int.util import timer, TIMINGS, spark_session, save_json, log
+from alaska_int.util import timer, TIMINGS, spark_session, cluster_info, save_json, log
+RUNS = {}
+def bench(name, fn, reps=3):
+    # run fn reps times; keep every run and store the median in TIMINGS
+    import statistics
+    out = None
+    for i in range(reps):
+        t0 = time.perf_counter(); out = fn(); RUNS.setdefault(name, []).append(round(time.perf_counter() - t0, 3))
+    TIMINGS[name] = statistics.median(RUNS[name])
+    log.info("%s: runs %s, median %.2f s", name, RUNS[name], TIMINGS[name])
+    return out
 SKIP_STREAM = os.getenv("SKIP_STREAM") == "1"
 pd.set_option("display.width", 160); pd.set_option("display.max_colwidth", 60)
 print(platform.platform(), "| Python", platform.python_version(), "| CPUs:", os.cpu_count())
@@ -43,6 +53,8 @@ with timer("ingest_pandas"):
 with timer("ingest_dask"):
     raw_dask = loaders.load_dask(npartitions=16).compute()
 spark = spark_session("alaska-a6", kafka=not SKIP_STREAM)
+CLUSTER = cluster_info(spark)
+print("Spark cluster:", CLUSTER)
 with timer("ingest_spark"):
     rdd, raw_sdf = loaders.load_spark_rdd(spark)
     n_spark = raw_sdf.count()
@@ -164,14 +176,12 @@ specs.head()
 md("## 7. Entity resolution: Pandas vs. Spark DataFrames")
 code("""
 er_gt = loaders.load_ground_truth("entity_resolution")
-with timer("er_pandas"):
-    resolved, vocab, dfreq = er.resolve_pandas(cleaned)
+resolved, vocab, dfreq = bench("er_pandas", lambda: er.resolve_pandas(cleaned))
 er_eval = er.evaluate(resolved, er_gt)
 display(er_eval)
 clean_sdf = spark.createDataFrame(cleaned[["spec_id", "vertical", "source", "attribute", "value"]])
 clean_sdf = clean_sdf.repartition(8).cache(); clean_sdf.count()
-with timer("er_spark"):
-    resolved_s = er.resolve_spark(spark, clean_sdf, vocab).toPandas()
+resolved_s = bench("er_spark", lambda: er.resolve_spark(spark, clean_sdf, vocab).toPandas())
 er_eval_spark = er.evaluate(resolved_s, er_gt)
 agree = resolved.merge(resolved_s[["spec_id", "entity_id"]], on="spec_id", suffixes=("", "_spark"))
 print(f"Spark vs Pandas entity assignment agreement: {(agree.entity_id == agree.entity_id_spark).mean():.4f}")
@@ -183,15 +193,13 @@ code("""
 # join + aggregate benchmark: attribute rows x schema-matching ground truth, counted per target attribute
 gt_ids = sm_gt.rename(columns={"source_attribute_id": "sid"})[["sid", "target_attribute_name"]]
 long_ids = cleaned.assign(sid=cleaned.source + "//" + cleaned.attribute)[["spec_id", "sid"]]
-with timer("join_pandas"):
-    j1 = long_ids.merge(gt_ids, on="sid").groupby("target_attribute_name").spec_id.nunique()
-with timer("join_dask"):
-    j2 = dd.from_pandas(long_ids, npartitions=8).merge(gt_ids, on="sid").groupby("target_attribute_name").spec_id.nunique().compute()
+j1 = bench("join_pandas", lambda: long_ids.merge(gt_ids, on="sid").groupby("target_attribute_name").spec_id.nunique())
+j2 = bench("join_dask", lambda: dd.from_pandas(long_ids, npartitions=8).merge(gt_ids, on="sid").groupby("target_attribute_name").spec_id.nunique().compute())
 from pyspark.sql import functions as F
-with timer("join_spark"):
-    j3 = (spark.createDataFrame(long_ids).join(F.broadcast(spark.createDataFrame(gt_ids)), "sid")
-              .groupBy("target_attribute_name").agg(F.countDistinct("spec_id").alias("n")).toPandas())
+j3 = bench("join_spark", lambda: (spark.createDataFrame(long_ids).join(F.broadcast(spark.createDataFrame(gt_ids)), "sid")
+              .groupBy("target_attribute_name").agg(F.countDistinct("spec_id").alias("n")).toPandas()))
 print("same result:", j1.sort_index().equals(j2.sort_index()), len(j1) == len(j3))
+clean_sdf.unpersist(); del clean_sdf                 # free executor memory before the streaming section
 """)
 code("""
 specs = specs.join(resolved.set_index("spec_id")[["brand", "block_key", "entity_id"]])
@@ -208,7 +216,7 @@ specs.reset_index().to_parquet(config.OUT_DIR / "unified_specs.parquet")
 quality.pivot(index="field", columns="stage", values="pct_missing").round(1)
 """)
 
-md("## 8. Real-time integration: listing API → Kafka → Spark Structured Streaming → Parquet + MongoDB")
+md("## 8. Streaming integration: replayed listing API → Kafka → Spark Structured Streaming → Parquet + MongoDB")
 code("""
 from alaska_int import producer, stream_job
 catalog = resolved[resolved.block_key.notna()].groupby("block_key").agg(entity_id=("entity_id", "first"), entity_size=("spec_id", "size")).reset_index()
@@ -265,7 +273,7 @@ summary = {
     "listings": int(raw.spec_id.nunique()), "sources": int(raw.source.nunique()), "attribute_rows": int(len(raw)),
     "clean_report": clean_report, "schema_matching": sm_eval.to_dict("records"), "entity_resolution": er_eval.to_dict("records"),
     "entity_resolution_spark": er_eval_spark.to_dict("records"), "quality": quality.to_dict("records"),
-    "timings_s": TIMINGS, "stream": {"listings": int(stream_metrics.rows.sum()) if len(stream_metrics) else 0,
+    "timings_s": TIMINGS, "timing_runs_s": RUNS, "spark_cluster": CLUSTER, "stream": {"listings": int(stream_metrics.rows.sum()) if len(stream_metrics) else 0,
         "batches": int(len(stream_metrics)), "elapsed_s": round(elapsed, 1), "producer": prod,
         "match_rate": round(float(stream_metrics.matched.sum() / max(1, stream_metrics.rows.sum())), 3) if len(stream_metrics) else None,
         "max_lag_s": float(stream_metrics.max_lag_s.max()) if len(stream_metrics) else None, "accuracy": stream_acc},

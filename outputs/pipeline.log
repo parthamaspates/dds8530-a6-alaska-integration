@@ -219,3 +219,227 @@
 2026-11-07 01:26:44,498 INFO alaska: stream: 2516 listings processed in 21 micro-batches
 2026-11-07 01:26:48,885 INFO py4j.clientserver: Received command  on object id 
 2026-11-07 01:26:48,886 INFO py4j.clientserver: Closing down clientserver connection
+2026-11-07 02:23:50,189 INFO matplotlib.font_manager: generated new fontManager
+2026-11-07 02:24:18,283 INFO alaska: ingest_pandas: 27.95 s
+2026-11-07 02:24:35,276 INFO alaska: ingest_dask: 16.99 s
+2026-11-07 02:25:11,788 INFO alaska: ingest_spark: 32.34 s
+2026-11-07 02:25:51,757 INFO alaska: PostgreSQL: 29047 specs, 492727 attribute rows
+2026-11-07 02:25:51,788 INFO alaska: seed_postgres: 20.50 s
+2026-11-07 02:25:52,944 INFO alaska: MongoDB: 16059 documents
+2026-11-07 02:25:52,966 INFO alaska: seed_mongo: 1.18 s
+2026-11-07 02:25:54,893 INFO alaska: CSV feed: 684277 rows -> notebook_partner_feed.csv
+2026-11-07 02:25:54,907 INFO alaska: seed_csv: 1.94 s
+2026-11-07 02:25:55,073 INFO alaska: Streaming hold-out: 2516 listings -> stream_listings.jsonl
+2026-11-07 02:25:56,284 INFO alaska: extract_postgres: 1.20 s
+2026-11-07 02:25:56,568 INFO alaska: extract_mongo: 0.26 s
+2026-11-07 02:25:57,220 INFO alaska: extract_csv_pandas: 0.64 s
+2026-11-07 02:25:57,737 INFO alaska: extract_csv_dask: 0.52 s
+2026-11-07 02:26:07,783 INFO alaska: clean_pandas: 9.41 s
+2026-11-07 02:26:13,714 INFO alaska: clean_dask_values: 5.93 s
+2026-11-07 02:26:14,764 INFO alaska: schema_matching: 0.72 s
+2026-11-07 02:26:25,078 INFO alaska: er_pandas: runs [2.651, 2.759, 2.637], median 2.65 s
+2026-11-07 02:26:51,154 INFO alaska: er_spark: runs [10.295, 5.41, 4.978], median 5.41 s
+2026-11-07 02:26:55,419 INFO alaska: join_pandas: runs [0.393, 0.353, 0.351], median 0.35 s
+2026-11-07 02:26:59,045 INFO alaska: join_dask: runs [1.633, 1.01, 0.981], median 1.01 s
+2026-11-07 02:27:04,511 INFO alaska: join_spark: runs [1.966, 1.783, 1.715], median 1.78 s
+2026-11-07 02:27:05,586 INFO kafka.net.selector: IO loop starting (client_id=kafka-python-3.0.13)
+2026-11-07 02:27:05,589 INFO kafka.net.manager: Attempting bootstrap to bootstrap-0 at kafka:9092 (rack None)
+2026-11-07 02:27:05,590 INFO kafka.net.manager: Initializing connection for node_id bootstrap-0 at kafka:9092 (rack=None)
+2026-11-07 02:27:05,603 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.3:9092<-52940]>: connected to <socket.socket fd=89, family=2, type=1, proto=6, laddr=('172.19.0.9', 52940), raddr=('172.19.0.3', 9092)>
+2026-11-07 02:27:05,653 INFO kafka.net.connection: <KafkaConnection node_id=bootstrap-0 host=[172.19.0.3:9092<-52940] broker_version=unknown (initializing)>: Broker version identified as 3.8
+2026-11-07 02:27:05,653 INFO kafka.net.connection: <KafkaConnection node_id=bootstrap-0 host=[172.19.0.3:9092<-52940] broker_version=(3, 8) (connected)>: Connected
+2026-11-07 02:27:05,659 INFO kafka.cluster: Updated metadata: ClusterMetadata(brokers: 1, topics: 0, coordinators: 0)
+2026-11-07 02:27:05,660 INFO kafka.net.manager: Bootstrap complete: ClusterMetadata(brokers: 1, topics: 0, coordinators: 0)
+2026-11-07 02:27:05,660 INFO kafka.net.manager: Closing bootstrap connection bootstrap-0
+2026-11-07 02:27:05,661 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.3:9092<-52940]>: Closing transport
+2026-11-07 02:27:05,661 INFO kafka.net.connection: <KafkaConnection node_id=bootstrap-0 broker_version=(3, 8) (disconnected)>: Connection closed
+2026-11-07 02:27:05,662 INFO kafka.cluster: Starting metadata refresh loop
+2026-11-07 02:27:05,664 INFO kafka.net.manager: Initializing connection for node_id 1 at kafka:9092 (rack=None)
+2026-11-07 02:27:05,667 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.3:9092<-52946]>: connected to <socket.socket fd=89, family=2, type=1, proto=6, laddr=('172.19.0.9', 52946), raddr=('172.19.0.3', 9092)>
+2026-11-07 02:27:05,670 INFO kafka.net.connection: <KafkaConnection node_id=1 host=[172.19.0.3:9092<-52946] broker_version=(3, 8) (connected)>: Connected
+2026-11-07 02:27:05,885 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.3:9092<-52946]>: Closing transport
+2026-11-07 02:27:05,886 INFO kafka.net.connection: <KafkaConnection node_id=1 broker_version=(3, 8) (disconnected)>: Connection closed
+2026-11-07 02:27:05,887 INFO kafka.cluster: Stopping metadata refresh loop
+2026-11-07 02:27:05,888 INFO kafka.net.selector: IO loop exited cleanly (client_id=kafka-python-3.0.13, stop=True)
+2026-11-07 02:27:06,206 INFO py4j.java_gateway: Callback Server Starting
+2026-11-07 02:27:06,210 INFO py4j.java_gateway: Socket listening on ('127.0.0.1', 43215)
+2026-11-07 02:27:07,232 INFO py4j.clientserver: Python Server ready to receive messages
+2026-11-07 02:27:07,245 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:27:59,670 INFO alaska: streaming queries started; starting the producer
+2026-11-07 02:27:59,676 INFO kafka.net.selector: IO loop starting (client_id=kafka-python-3.0.13)
+2026-11-07 02:27:59,679 INFO kafka.net.manager: Attempting bootstrap to bootstrap-0 at kafka:9092 (rack None)
+2026-11-07 02:27:59,680 INFO kafka.net.manager: Initializing connection for node_id bootstrap-0 at kafka:9092 (rack=None)
+2026-11-07 02:27:59,681 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.3:9092<-36832]>: connected to <socket.socket fd=91, family=2, type=1, proto=6, laddr=('172.19.0.9', 36832), raddr=('172.19.0.3', 9092)>
+2026-11-07 02:27:59,687 INFO kafka.net.connection: <KafkaConnection node_id=bootstrap-0 host=[172.19.0.3:9092<-36832] broker_version=unknown (initializing)>: Broker version identified as 3.8
+2026-11-07 02:27:59,688 INFO kafka.net.connection: <KafkaConnection node_id=bootstrap-0 host=[172.19.0.3:9092<-36832] broker_version=(3, 8) (connected)>: Connected
+2026-11-07 02:27:59,690 INFO kafka.cluster: Updated metadata: ClusterMetadata(brokers: 1, topics: 0, coordinators: 0)
+2026-11-07 02:27:59,691 INFO kafka.net.manager: Bootstrap complete: ClusterMetadata(brokers: 1, topics: 0, coordinators: 0)
+2026-11-07 02:27:59,691 INFO kafka.net.manager: Closing bootstrap connection bootstrap-0
+2026-11-07 02:27:59,693 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.3:9092<-36832]>: Closing transport
+2026-11-07 02:27:59,693 INFO kafka.net.connection: <KafkaConnection node_id=bootstrap-0 broker_version=(3, 8) (disconnected)>: Connection closed
+2026-11-07 02:27:59,694 INFO kafka.cluster: Starting metadata refresh loop
+2026-11-07 02:27:59,694 INFO kafka.net.manager: Initializing connection for node_id 1 at kafka:9092 (rack=None)
+2026-11-07 02:27:59,696 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.3:9092<-36834]>: connected to <socket.socket fd=91, family=2, type=1, proto=6, laddr=('172.19.0.9', 36834), raddr=('172.19.0.3', 9092)>
+2026-11-07 02:27:59,698 INFO kafka.net.connection: <KafkaConnection node_id=1 host=[172.19.0.3:9092<-36834] broker_version=(3, 8) (connected)>: Connected
+2026-11-07 02:27:59,705 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.3:9092<-36834]>: Closing transport
+2026-11-07 02:27:59,706 INFO kafka.net.connection: <KafkaConnection node_id=1 broker_version=(3, 8) (disconnected)>: Connection closed
+2026-11-07 02:27:59,707 INFO kafka.cluster: Stopping metadata refresh loop
+2026-11-07 02:27:59,707 INFO kafka.net.selector: IO loop exited cleanly (client_id=kafka-python-3.0.13, stop=True)
+2026-11-07 02:27:59,708 INFO kafka.net.manager: Attempting bootstrap to bootstrap-0 at kafka:9092 (rack None)
+2026-11-07 02:27:59,708 INFO kafka.net.manager: Initializing connection for node_id bootstrap-0 at kafka:9092 (rack=None)
+2026-11-07 02:27:59,710 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.3:9092<-36840]>: connected to <socket.socket fd=91, family=2, type=1, proto=6, laddr=('172.19.0.9', 36840), raddr=('172.19.0.3', 9092)>
+2026-11-07 02:27:59,713 INFO kafka.net.connection: <KafkaConnection node_id=bootstrap-0 host=[172.19.0.3:9092<-36840] broker_version=unknown (initializing)>: Broker version identified as 3.8
+2026-11-07 02:27:59,713 INFO kafka.net.connection: <KafkaConnection node_id=bootstrap-0 host=[172.19.0.3:9092<-36840] broker_version=(3, 8) (connected)>: Connected
+2026-11-07 02:27:59,715 INFO kafka.cluster: Updated metadata: ClusterMetadata(brokers: 1, topics: 0, coordinators: 0)
+2026-11-07 02:27:59,715 INFO kafka.net.manager: Bootstrap complete: ClusterMetadata(brokers: 1, topics: 0, coordinators: 0)
+2026-11-07 02:27:59,715 INFO kafka.net.manager: Closing bootstrap connection bootstrap-0
+2026-11-07 02:27:59,716 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.3:9092<-36840]>: Closing transport
+2026-11-07 02:27:59,716 INFO kafka.net.connection: <KafkaConnection node_id=bootstrap-0 broker_version=(3, 8) (disconnected)>: Connection closed
+2026-11-07 02:27:59,717 INFO kafka.cluster: Starting metadata refresh loop
+2026-11-07 02:27:59,717 INFO kafka.producer.kafka: <KafkaProducer client_id=kafka-python-producer-1 transactional_id=None>: Instantiated an idempotent producer.
+2026-11-07 02:27:59,718 INFO kafka.producer.transaction_manager: ProducerId set to -1 with epoch -1
+2026-11-07 02:27:59,720 INFO kafka.net.manager: Initializing connection for node_id 1 at kafka:9092 (rack=None)
+2026-11-07 02:27:59,722 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.3:9092<-36850]>: connected to <socket.socket fd=93, family=2, type=1, proto=6, laddr=('172.19.0.9', 36850), raddr=('172.19.0.3', 9092)>
+2026-11-07 02:27:59,724 INFO kafka.net.connection: <KafkaConnection node_id=1 host=[172.19.0.3:9092<-36850] broker_version=(3, 8) (connected)>: Connected
+2026-11-07 02:27:59,840 INFO kafka.producer.transaction_manager: ProducerId set to 0 with epoch 0
+2026-11-07 02:28:00,846 INFO kafka.cluster: Updated metadata: ClusterMetadata(brokers: 1, topics: 1, coordinators: 0)
+2026-11-07 02:28:05,166 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:29:21,550 WARNING kafka.net.connection: <KafkaConnection node_id=1 host=[172.19.0.3:9092<-36850] broker_version=(3, 8) (connected)>: Request timed out after 29999 ms. Closing connection.
+2026-11-07 02:29:21,561 ERROR kafka.net.transport: <KafkaTCPTransport [172.19.0.3:9092<-36850]>: Abort ([Error 7] RequestTimedOutError: Request timed out after 29999 ms)
+2026-11-07 02:29:21,562 ERROR kafka.net.connection: <KafkaConnection node_id=1 broker_version=(3, 8) (disconnected)>: Connection lost: [Error 7] RequestTimedOutError: Request timed out after 29999 ms
+2026-11-07 02:29:21,564 ERROR kafka.producer.sender: <Sender client_id=kafka-python-producer-1 transactional_id=None>: Error sending produce request to node 1: [Error 7] RequestTimedOutError: Request timed out after 29999 ms
+2026-11-07 02:29:21,565 WARNING kafka.producer.sender: <Sender client_id=kafka-python-producer-1 transactional_id=None>: Got error produce response on topic-partition TopicPartition(topic='alaska.listings', partition=0), retrying (inf attempts left): RequestTimedOutError. Error Message: Request timed out after 29999 ms
+2026-11-07 02:29:21,566 WARNING kafka.producer.sender: <Sender client_id=kafka-python-producer-1 transactional_id=None>: Got error produce response on topic-partition TopicPartition(topic='alaska.listings', partition=1), retrying (inf attempts left): RequestTimedOutError. Error Message: Request timed out after 29999 ms
+2026-11-07 02:29:21,567 WARNING kafka.producer.sender: <Sender client_id=kafka-python-producer-1 transactional_id=None>: Got error produce response on topic-partition TopicPartition(topic='alaska.listings', partition=2), retrying (inf attempts left): RequestTimedOutError. Error Message: Request timed out after 29999 ms
+2026-11-07 02:29:21,567 INFO kafka.net.manager: Initializing connection for node_id 1 at kafka:9092 (rack=None)
+2026-11-07 02:29:21,569 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.3:9092<-34398]>: connected to <socket.socket fd=93, family=2, type=1, proto=6, laddr=('172.19.0.9', 34398), raddr=('172.19.0.3', 9092)>
+2026-11-07 02:29:21,573 INFO kafka.net.connection: <KafkaConnection node_id=1 host=[172.19.0.3:9092<-34398] broker_version=(3, 8) (connected)>: Connected
+2026-11-07 02:29:21,576 INFO kafka.cluster: Updated metadata: ClusterMetadata(brokers: 1, topics: 1, coordinators: 0)
+2026-11-07 02:29:21,847 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:29:34,143 WARNING kafka.net.selector: Task <kafka.net.selector.Task object at 0xfffed45023d0> ran for 0.429s (>0.100s threshold). It is blocking the event loop -- likely a tight sync loop inside a coroutine. Other pollers will time out.
+2026-11-07 02:30:07,351 WARNING kafka.net.selector: Task <kafka.net.selector.Task object at 0xfffed4596e90> ran for 1.875s (>0.100s threshold). It is blocking the event loop -- likely a tight sync loop inside a coroutine. Other pollers will time out.
+2026-11-07 02:30:26,791 WARNING kafka.net.selector: Task <kafka.net.selector.Task object at 0xfffed4b8f790> ran for 0.129s (>0.100s threshold). It is blocking the event loop -- likely a tight sync loop inside a coroutine. Other pollers will time out.
+2026-11-07 02:30:28,065 WARNING kafka.producer.sender: <Sender client_id=kafka-python-producer-1 transactional_id=None>: Got error produce response on topic-partition TopicPartition(topic='alaska.listings', partition=2), retrying (inf attempts left): NotLeaderForPartitionError
+2026-11-07 02:30:28,075 WARNING kafka.producer.sender: <Sender client_id=kafka-python-producer-1 transactional_id=None>: Got error produce response on topic-partition TopicPartition(topic='alaska.listings', partition=1), retrying (inf attempts left): NotLeaderForPartitionError
+2026-11-07 02:30:28,078 WARNING kafka.producer.sender: <Sender client_id=kafka-python-producer-1 transactional_id=None>: Got error produce response on topic-partition TopicPartition(topic='alaska.listings', partition=0), retrying (inf attempts left): NotLeaderForPartitionError
+2026-11-07 02:30:28,098 INFO kafka.cluster: Updated metadata: ClusterMetadata(brokers: 1, topics: 1, coordinators: 0)
+2026-11-07 02:30:28,624 INFO alaska: producer: 2516 listings published in 17 API polls
+2026-11-07 02:30:28,625 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.3:9092<-34398]>: Closing transport
+2026-11-07 02:30:28,626 INFO kafka.net.connection: <KafkaConnection node_id=1 broker_version=(3, 8) (disconnected)>: Connection closed
+2026-11-07 02:30:28,627 INFO kafka.cluster: Stopping metadata refresh loop
+2026-11-07 02:30:30,640 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:31:49,452 INFO alaska: stream: 2516 listings processed in 3 micro-batches
+2026-11-07 02:31:53,461 INFO py4j.clientserver: Received command  on object id 
+2026-11-07 02:31:53,461 INFO py4j.clientserver: Closing down clientserver connection
+2026-11-07 02:38:52,002 INFO matplotlib.font_manager: generated new fontManager
+2026-11-07 02:39:21,595 INFO alaska: ingest_pandas: 29.41 s
+2026-11-07 02:39:38,936 INFO alaska: ingest_dask: 17.34 s
+2026-11-07 02:40:09,203 INFO alaska: ingest_spark: 25.73 s
+2026-11-07 02:40:48,710 INFO alaska: PostgreSQL: 29047 specs, 492727 attribute rows
+2026-11-07 02:40:48,747 INFO alaska: seed_postgres: 21.37 s
+2026-11-07 02:40:50,036 INFO alaska: MongoDB: 16059 documents
+2026-11-07 02:40:50,057 INFO alaska: seed_mongo: 1.31 s
+2026-11-07 02:40:52,230 INFO alaska: CSV feed: 684277 rows -> notebook_partner_feed.csv
+2026-11-07 02:40:52,244 INFO alaska: seed_csv: 2.19 s
+2026-11-07 02:40:52,423 INFO alaska: Streaming hold-out: 2516 listings -> stream_listings.jsonl
+2026-11-07 02:40:53,547 INFO alaska: extract_postgres: 1.12 s
+2026-11-07 02:40:53,809 INFO alaska: extract_mongo: 0.25 s
+2026-11-07 02:40:54,399 INFO alaska: extract_csv_pandas: 0.58 s
+2026-11-07 02:40:54,935 INFO alaska: extract_csv_dask: 0.54 s
+2026-11-07 02:41:04,288 INFO alaska: clean_pandas: 8.81 s
+2026-11-07 02:41:09,825 INFO alaska: clean_dask_values: 5.53 s
+2026-11-07 02:41:10,901 INFO alaska: schema_matching: 0.72 s
+2026-11-07 02:41:21,046 INFO alaska: er_pandas: runs [2.661, 2.719, 2.635], median 2.66 s
+2026-11-07 02:41:49,418 INFO alaska: er_spark: runs [10.476, 8.27, 4.89], median 8.27 s
+2026-11-07 02:41:51,648 INFO alaska: join_pandas: runs [0.393, 0.351, 0.334], median 0.35 s
+2026-11-07 02:41:54,501 INFO alaska: join_dask: runs [1.025, 0.907, 0.921], median 0.92 s
+2026-11-07 02:41:59,163 INFO alaska: join_spark: runs [2.052, 1.358, 1.251], median 1.36 s
+2026-11-07 02:41:59,740 INFO kafka.net.selector: IO loop starting (client_id=kafka-python-3.0.13)
+2026-11-07 02:41:59,741 INFO kafka.net.manager: Attempting bootstrap to bootstrap-0 at kafka:9092 (rack None)
+2026-11-07 02:41:59,741 INFO kafka.net.manager: Initializing connection for node_id bootstrap-0 at kafka:9092 (rack=None)
+2026-11-07 02:41:59,744 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.5:9092<-56158]>: connected to <socket.socket fd=89, family=2, type=1, proto=6, laddr=('172.19.0.9', 56158), raddr=('172.19.0.5', 9092)>
+2026-11-07 02:41:59,754 INFO kafka.net.connection: <KafkaConnection node_id=bootstrap-0 host=[172.19.0.5:9092<-56158] broker_version=unknown (initializing)>: Broker version identified as 3.8
+2026-11-07 02:41:59,755 INFO kafka.net.connection: <KafkaConnection node_id=bootstrap-0 host=[172.19.0.5:9092<-56158] broker_version=(3, 8) (connected)>: Connected
+2026-11-07 02:41:59,760 INFO kafka.cluster: Updated metadata: ClusterMetadata(brokers: 1, topics: 0, coordinators: 0)
+2026-11-07 02:41:59,760 INFO kafka.net.manager: Bootstrap complete: ClusterMetadata(brokers: 1, topics: 0, coordinators: 0)
+2026-11-07 02:41:59,761 INFO kafka.net.manager: Closing bootstrap connection bootstrap-0
+2026-11-07 02:41:59,761 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.5:9092<-56158]>: Closing transport
+2026-11-07 02:41:59,762 INFO kafka.net.connection: <KafkaConnection node_id=bootstrap-0 broker_version=(3, 8) (disconnected)>: Connection closed
+2026-11-07 02:41:59,762 INFO kafka.cluster: Starting metadata refresh loop
+2026-11-07 02:41:59,763 INFO kafka.net.manager: Initializing connection for node_id 1 at kafka:9092 (rack=None)
+2026-11-07 02:41:59,764 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.5:9092<-56170]>: connected to <socket.socket fd=89, family=2, type=1, proto=6, laddr=('172.19.0.9', 56170), raddr=('172.19.0.5', 9092)>
+2026-11-07 02:41:59,765 INFO kafka.net.connection: <KafkaConnection node_id=1 host=[172.19.0.5:9092<-56170] broker_version=(3, 8) (connected)>: Connected
+2026-11-07 02:41:59,814 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.5:9092<-56170]>: Closing transport
+2026-11-07 02:41:59,815 INFO kafka.net.connection: <KafkaConnection node_id=1 broker_version=(3, 8) (disconnected)>: Connection closed
+2026-11-07 02:41:59,816 INFO kafka.cluster: Stopping metadata refresh loop
+2026-11-07 02:41:59,816 INFO kafka.net.selector: IO loop exited cleanly (client_id=kafka-python-3.0.13, stop=True)
+2026-11-07 02:41:59,983 INFO py4j.java_gateway: Callback Server Starting
+2026-11-07 02:41:59,984 INFO py4j.java_gateway: Socket listening on ('127.0.0.1', 39443)
+2026-11-07 02:42:00,798 INFO py4j.clientserver: Python Server ready to receive messages
+2026-11-07 02:42:00,799 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:42:01,348 INFO alaska: streaming queries started; starting the producer
+2026-11-07 02:42:01,350 INFO kafka.net.selector: IO loop starting (client_id=kafka-python-3.0.13)
+2026-11-07 02:42:01,354 INFO kafka.net.manager: Attempting bootstrap to bootstrap-0 at kafka:9092 (rack None)
+2026-11-07 02:42:01,355 INFO kafka.net.manager: Initializing connection for node_id bootstrap-0 at kafka:9092 (rack=None)
+2026-11-07 02:42:01,357 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.5:9092<-56216]>: connected to <socket.socket fd=93, family=2, type=1, proto=6, laddr=('172.19.0.9', 56216), raddr=('172.19.0.5', 9092)>
+2026-11-07 02:42:01,360 INFO kafka.net.connection: <KafkaConnection node_id=bootstrap-0 host=[172.19.0.5:9092<-56216] broker_version=unknown (initializing)>: Broker version identified as 3.8
+2026-11-07 02:42:01,361 INFO kafka.net.connection: <KafkaConnection node_id=bootstrap-0 host=[172.19.0.5:9092<-56216] broker_version=(3, 8) (connected)>: Connected
+2026-11-07 02:42:01,363 INFO kafka.cluster: Updated metadata: ClusterMetadata(brokers: 1, topics: 0, coordinators: 0)
+2026-11-07 02:42:01,363 INFO kafka.net.manager: Bootstrap complete: ClusterMetadata(brokers: 1, topics: 0, coordinators: 0)
+2026-11-07 02:42:01,364 INFO kafka.net.manager: Closing bootstrap connection bootstrap-0
+2026-11-07 02:42:01,364 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.5:9092<-56216]>: Closing transport
+2026-11-07 02:42:01,364 INFO kafka.net.connection: <KafkaConnection node_id=bootstrap-0 broker_version=(3, 8) (disconnected)>: Connection closed
+2026-11-07 02:42:01,365 INFO kafka.cluster: Starting metadata refresh loop
+2026-11-07 02:42:01,365 INFO kafka.net.manager: Initializing connection for node_id 1 at kafka:9092 (rack=None)
+2026-11-07 02:42:01,366 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.5:9092<-56224]>: connected to <socket.socket fd=93, family=2, type=1, proto=6, laddr=('172.19.0.9', 56224), raddr=('172.19.0.5', 9092)>
+2026-11-07 02:42:01,370 INFO kafka.net.connection: <KafkaConnection node_id=1 host=[172.19.0.5:9092<-56224] broker_version=(3, 8) (connected)>: Connected
+2026-11-07 02:42:01,374 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.5:9092<-56224]>: Closing transport
+2026-11-07 02:42:01,374 INFO kafka.net.connection: <KafkaConnection node_id=1 broker_version=(3, 8) (disconnected)>: Connection closed
+2026-11-07 02:42:01,375 INFO kafka.cluster: Stopping metadata refresh loop
+2026-11-07 02:42:01,375 INFO kafka.net.selector: IO loop exited cleanly (client_id=kafka-python-3.0.13, stop=True)
+2026-11-07 02:42:01,376 INFO kafka.net.manager: Attempting bootstrap to bootstrap-0 at kafka:9092 (rack None)
+2026-11-07 02:42:01,377 INFO kafka.net.manager: Initializing connection for node_id bootstrap-0 at kafka:9092 (rack=None)
+2026-11-07 02:42:01,378 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.5:9092<-56238]>: connected to <socket.socket fd=93, family=2, type=1, proto=6, laddr=('172.19.0.9', 56238), raddr=('172.19.0.5', 9092)>
+2026-11-07 02:42:01,380 INFO kafka.net.connection: <KafkaConnection node_id=bootstrap-0 host=[172.19.0.5:9092<-56238] broker_version=unknown (initializing)>: Broker version identified as 3.8
+2026-11-07 02:42:01,383 INFO kafka.net.connection: <KafkaConnection node_id=bootstrap-0 host=[172.19.0.5:9092<-56238] broker_version=(3, 8) (connected)>: Connected
+2026-11-07 02:42:01,384 INFO kafka.cluster: Updated metadata: ClusterMetadata(brokers: 1, topics: 0, coordinators: 0)
+2026-11-07 02:42:01,385 INFO kafka.net.manager: Bootstrap complete: ClusterMetadata(brokers: 1, topics: 0, coordinators: 0)
+2026-11-07 02:42:01,386 INFO kafka.net.manager: Closing bootstrap connection bootstrap-0
+2026-11-07 02:42:01,386 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.5:9092<-56238]>: Closing transport
+2026-11-07 02:42:01,387 INFO kafka.net.connection: <KafkaConnection node_id=bootstrap-0 broker_version=(3, 8) (disconnected)>: Connection closed
+2026-11-07 02:42:01,387 INFO kafka.cluster: Starting metadata refresh loop
+2026-11-07 02:42:01,388 INFO kafka.producer.kafka: <KafkaProducer client_id=kafka-python-producer-1 transactional_id=None>: Instantiated an idempotent producer.
+2026-11-07 02:42:01,388 INFO kafka.producer.transaction_manager: ProducerId set to -1 with epoch -1
+2026-11-07 02:42:01,389 INFO kafka.net.manager: Initializing connection for node_id 1 at kafka:9092 (rack=None)
+2026-11-07 02:42:01,392 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.5:9092<-56242]>: connected to <socket.socket fd=95, family=2, type=1, proto=6, laddr=('172.19.0.9', 56242), raddr=('172.19.0.5', 9092)>
+2026-11-07 02:42:01,393 INFO kafka.net.connection: <KafkaConnection node_id=1 host=[172.19.0.5:9092<-56242] broker_version=(3, 8) (connected)>: Connected
+2026-11-07 02:42:01,501 INFO kafka.producer.transaction_manager: ProducerId set to 0 with epoch 0
+2026-11-07 02:42:02,474 INFO kafka.cluster: Updated metadata: ClusterMetadata(brokers: 1, topics: 1, coordinators: 0)
+2026-11-07 02:42:05,160 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:42:10,155 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:42:15,184 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:42:20,151 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:42:25,195 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:42:30,154 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:42:35,216 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:42:40,148 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:42:45,183 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:42:50,141 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:42:55,205 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:43:00,178 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:43:05,181 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:43:10,154 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:43:15,170 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:43:20,141 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:43:25,167 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:43:30,158 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:43:35,155 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:43:40,149 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:43:42,756 INFO alaska: producer: 2516 listings published in 101 API polls
+2026-11-07 02:43:42,760 INFO kafka.net.transport: <KafkaTCPTransport [172.19.0.5:9092<-56242]>: Closing transport
+2026-11-07 02:43:42,761 INFO kafka.net.connection: <KafkaConnection node_id=1 broker_version=(3, 8) (disconnected)>: Connection closed
+2026-11-07 02:43:42,762 INFO kafka.cluster: Stopping metadata refresh loop
+2026-11-07 02:43:45,154 INFO py4j.clientserver: Received command c on object id p0
+2026-11-07 02:43:54,498 INFO alaska: stream: 2516 listings processed in 21 micro-batches
+2026-11-07 02:43:58,470 INFO py4j.clientserver: Received command  on object id 
+2026-11-07 02:43:58,470 INFO py4j.clientserver: Closing down clientserver connection

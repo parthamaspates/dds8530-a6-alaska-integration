@@ -1,4 +1,4 @@
-"""Marketplace listing API (FastAPI). Replays the held-out sources as if listings were being published live:
+"""Listing API (FastAPI) that replays the held-out Alaska sources at a target rate, simulating newly published listings:
 listing i becomes visible i / FEED_RATE seconds after the first request."""
 import json, random, time
 from fastapi import FastAPI, Query

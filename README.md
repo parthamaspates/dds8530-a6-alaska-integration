@@ -32,11 +32,11 @@ Alaska JSON lake ─────┼─ monitor  → MongoDB (documents) ──�
 | `outputs/` | Figures, `metrics.json`, HTML export of the notebook, logs, test results |
 | `tests/` | Unit tests for parsers, cleaning, schema matching and entity resolution |
 
-## Run everything (Docker Desktop, 8 GB memory or more)
+## Run everything (Docker Desktop with about 12 GB of memory)
 
 ```bash
 docker compose build
-docker compose run --rm app        # starts PostgreSQL, MongoDB, Kafka and the feed API, then runs scripts/run_all.sh
+docker compose run --rm app        # starts PostgreSQL, MongoDB, Kafka, the Spark cluster and the feed API, then runs scripts/run_all.sh
 docker compose down
 ```
 
@@ -44,16 +44,19 @@ docker compose down
 
 ## Results (Docker on a 10-core MacBook; `outputs/metrics.json`)
 
+Spark runs as a standalone cluster: `spark-master` plus two worker containers (`spark-worker-1`, `spark-worker-2`), each giving one executor 2 cores and 1 GB; the driver runs in the `app` container. The workers are separate nodes on the Docker network but share one physical machine.
+
 | | Camera | Monitor | Notebook |
 |---|---|---|---|
 | Schema matching precision / recall / F1 | .82 / .51 / .63 | .72 / .36 / .48 | .77 / .24 / .37 |
 | Entity resolution precision / recall / F1 | .90 / .67 / .77 | .27 / .31 / .29 | .24 / .73 / .36 |
 
+* Data: 69,616 specifications in 77 source directories (68 distinct domains; eight shops appear in several verticals).
 * Cleaning: 6,991 placeholder values, 326 duplicate attributes and 1,946 duplicate listings removed (65,154 listings kept).
 * Completeness of the unified schema: missing brand 61% -> 13%, screen size 58% -> 38%, weight 75% -> 65%.
 * Spark and Pandas entity resolution agree on 100% of listings.
-* Streaming: 2,516 listings through Kafka in 21 micro-batches (114 s, ~22 listings/s); 73% matched to a known entity in real time, 86% of those correct on labeled listings; maximum end-to-end lag 6.5 s.
-* Timings (s): ingest Pandas 34.5 / Dask 19.6 / Spark 28.8; clean Pandas 9.5 / Dask 6.0; join Pandas 0.5 / Dask 1.3 / Spark 2.5; entity resolution Pandas 2.7 / Spark 12.2.
+* Streaming (a FastAPI service replays the three held-out sites at 25 listings/s): 2,516 listings through Kafka in 21 micro-batches (113 s); 73% matched to a known entity as they arrived; 272 of the 317 matched listings that have labels (86%) were correct; maximum end-to-end lag 7.4 s.
+* Timings (s): ingest Pandas 29.4 / Dask 17.3 / Spark 25.7; clean Pandas 8.8 / Dask 5.5 (single runs). Join Pandas 0.35 / Dask 0.92 / Spark 1.36; entity resolution Pandas 2.7 / Spark 8.3 (medians of three runs).
 
 ## Data
 

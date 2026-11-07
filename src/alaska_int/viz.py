@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from . import config
 
-sns.set_theme(style="whitegrid", context="paper", font_scale=1.1)
+sns.set_theme(style="whitegrid", context="paper", font_scale=1.35)
 PAL = {"camera": "#1F5FA8", "monitor": "#D97706", "notebook": "#2E8B57"}
 
 def save(fig, name):
